@@ -1,17 +1,13 @@
 "use client";
 
-import { useAuthStore } from "@/stores/auth";
+import { Sidebar } from "@/components/chat/Sidebar";
+import { ChatPanel } from "@/components/chat/ChatPanel";
 
 export default function ChatPage() {
-  const user = useAuthStore((s) => s.user);
-  const logout = useAuthStore((s) => s.logout);
-
   return (
-    <div className="p-6">
-      <p>Hello, {user?.username}</p>
-      <button onClick={logout} className="mt-2 text-sm text-violet-300 underline">
-        Log out
-      </button>
+    <div className="grid h-full min-h-0 grid-cols-[20rem_1fr] gap-4">
+      <Sidebar />
+      <ChatPanel />
     </div>
   );
 }
