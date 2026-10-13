@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 interface AvatarProps {
 	name: string;
 	src?: string | null;
@@ -6,14 +10,21 @@ interface AvatarProps {
 }
 
 export function Avatar({ name, src, online, size = "md" }: AvatarProps) {
+	const [failedSrc, setFailedSrc] = useState<string | null>(null);
+	const showImage = Boolean(src) && src !== failedSrc;
 	const dimensions = size === "sm" ? "size-9 text-xs" : "size-11 text-sm";
 
 	return (
 		<div className="relative shrink-0">
-			{src ? (
+			{showImage ? (
 				// <img> normal de propósito: o utilizador pode colar qualquer domínio
 				// eslint-disable-next-line @next/next/no-img-element
-				<img src={src} alt="" className={`${dimensions} rounded-full object-cover`} />
+				<img
+					src={src!}
+					alt=""
+					onError={() => setFailedSrc(src ?? null)}
+					className={`${dimensions} rounded-full object-cover`}
+				/>
 			) : (
 				<div
 					className={`${dimensions} grid place-items-center rounded-full bg-violet-500/40 font-medium uppercase`}
