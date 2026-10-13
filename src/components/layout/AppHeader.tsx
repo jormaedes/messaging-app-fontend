@@ -17,7 +17,7 @@ export function AppHeader() {
 
 	return (
 		<header className="flex items-center justify-between px-6 py-4">
-			<p className="text-xl font-semibold tracking-tight">Sendzy</p>
+			<p className="text-xl font-semibold tracking-tight">Jormaedes</p>
 
 			<div className="flex items-center gap-4 text-sm text-white/60">
 				<span className="flex items-center gap-2" role="status">
