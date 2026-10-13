@@ -65,15 +65,15 @@ export function PeopleTab({ query, onOpened }: { query: string; onOpened: () => 
 		return (
 			<EmptyState
 				icon={Search}
-				title="Find people"
-				description="Type a username to start a conversation."
+				title="Encontrar pessoas"
+				description="Escreve um nome de utilizador para iniciar uma conversa."
 			/>
 		);
 	}
 	if (status === "loading") {
 		return (
-			<div className="grid h-full place-items-center" role="status" aria-label="Searching">
-				<LoaderCircle className="size-5 animate-spin text-white/40" />
+			<div className="grid h-full place-items-center" role="status" aria-label="A pesquisar">
+				<LoaderCircle className="size-5 animate-spin text-violet-300" />
 			</div>
 		);
 	}
@@ -81,8 +81,8 @@ export function PeopleTab({ query, onOpened }: { query: string; onOpened: () => 
 		return (
 			<EmptyState
 				icon={SearchX}
-				title="Something went wrong"
-				description="We couldn't complete that. Please try again."
+				title="Algo correu mal"
+				description="Não foi possível concluir. Tenta novamente."
 			/>
 		);
 	}
@@ -90,8 +90,8 @@ export function PeopleTab({ query, onOpened }: { query: string; onOpened: () => 
 		return (
 			<EmptyState
 				icon={SearchX}
-				title="No people found"
-				description={`Nobody matches “${term}”.`}
+				title="Não foram encontradas pessoas"
+				description={`Ninguém corresponde a “${term}”.`}
 			/>
 		);
 	}
@@ -126,14 +126,14 @@ function PersonRow({ user, disabled, loading, onClick }: PersonRowProps) {
 			<button
 				onClick={onClick}
 				disabled={disabled}
-				className="flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition hover:bg-white/5 disabled:opacity-60"
+				className="flex w-full items-center gap-3 rounded-md px-2.5 py-3 text-left transition hover:bg-[#191620] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400/40 disabled:opacity-60"
 			>
 				<Avatar name={userLabel(user)} src={user.avatarUrl} online={online} />
 				<div className="min-w-0 flex-1">
 					<p className="truncate text-sm font-medium">{userLabel(user)}</p>
-					<p className="truncate text-sm text-white/45">@{user.username}</p>
+					<p className="truncate text-sm text-[#a79fb2]">@{user.username}</p>
 				</div>
-				{loading && <LoaderCircle className="size-4 animate-spin text-white/50" />}
+				{loading && <LoaderCircle className="size-4 animate-spin text-violet-300" />}
 			</button>
 		</li>
 	);

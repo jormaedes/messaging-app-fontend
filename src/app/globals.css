@@ -2,15 +2,63 @@
 
 :root {
   color-scheme: dark;
+  --ink: #f4f1fa;
+  --muted-ink: #aaa3b8;
+  --line: #302a3b;
+  --accent: #8b5cf6;
+  --accent-soft: #261d38;
+}
+
+* {
+  scrollbar-color: #514363 transparent;
+  scrollbar-width: thin;
+}
+
+::selection {
+  color: #fff;
+  background: #6941c6;
+}
+
+:focus-visible {
+  outline: 2px solid #a78bfa;
+  outline-offset: 2px;
 }
 
 body {
   min-height: 100dvh;
-  color: #f5f5f7;
-  background-color: #08080a;
+  color: var(--ink);
+  background-color: #09080d;
   background-image:
-    radial-gradient(60% 50% at 55% 105%, rgba(139, 120, 200, 0.45), transparent 70%),
-    radial-gradient(50% 40% at 15% 95%, rgba(88, 62, 150, 0.35), transparent 70%);
+    linear-gradient(rgba(196, 166, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(196, 166, 255, 0.025) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 0%, #171220 0%, transparent 68%);
+  background-size: 28px 28px, 28px 28px, auto;
   background-attachment: fixed;
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-geist-sans), "Avenir Next", "Segoe UI", sans-serif;
+}
+
+@keyframes surface-enter {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.surface-enter {
+  animation: surface-enter 260ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

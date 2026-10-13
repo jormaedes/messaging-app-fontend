@@ -27,7 +27,7 @@ export default function SignupPage() {
 				confirmPassword: String(form.get("confirmPassword")),
 			});
 		} catch (err) {
-			setError(err instanceof ApiError ? err : new ApiError(0, "Could not reach the server"));
+			setError(err instanceof ApiError ? err : new ApiError(0, "Não foi possível ligar ao servidor."));
 		} finally {
 			setPending(false);
 		}
@@ -35,20 +35,20 @@ export default function SignupPage() {
 
 	return (
 		<AuthCard
-			title="Create your account"
-			subtitle="It only takes a moment."
+				title="Cria a tua conta"
+				subtitle="Só precisas de um instante."
 			footer={
 				<>
-					Already have an account?{" "}
-					<Link href="/login" className="text-violet-300 hover:underline">
-						Log in
+					Já tens uma conta?{" "}
+					<Link href="/login" className="font-medium text-violet-300 hover:underline">
+						Iniciar sessão
 					</Link>
 				</>
 			}
 		>
 			<form onSubmit={onSubmit} className="space-y-4" noValidate>
 				<Field
-					label="Username"
+					label="Nome de utilizador"
 					name="username"
 					icon={User}
 					autoComplete="username"
@@ -61,30 +61,30 @@ export default function SignupPage() {
 					type="email"
 					icon={Mail}
 					autoComplete="email"
-					placeholder="you@example.com"
+					placeholder="nome@exemplo.pt"
 					error={fieldError(error, "email")}
 				/>
 				<Field
-					label="Password"
+					label="Palavra-passe"
 					name="password"
 					type="password"
 					icon={Lock}
 					autoComplete="new-password"
-					placeholder="At least 8 characters"
+					placeholder="Pelo menos 8 caracteres"
 					error={fieldError(error, "password")}
 				/>
 				<Field
-					label="Confirm password"
+					label="Confirmar palavra-passe"
 					name="confirmPassword"
 					type="password"
 					icon={Lock}
 					autoComplete="new-password"
-					placeholder="Repeat your password"
+					placeholder="Repete a palavra-passe"
 					error={fieldError(error, "confirmPassword")}
 				/>
 
 				{error && error.fieldErrors.length === 0 && (
-					<p className="rounded-xl bg-red-400/10 px-3 py-2 text-sm text-red-300" role="alert">
+					<p className="rounded-md bg-red-950/50 px-3 py-2 text-sm text-red-300" role="alert">
 						{error.message}
 					</p>
 				)}
@@ -92,10 +92,10 @@ export default function SignupPage() {
 				<button
 					type="submit"
 					disabled={pending}
-					className="flex w-full items-center justify-center gap-2 rounded-2xl bg-violet-500 px-4 py-2.5 text-sm font-medium transition hover:bg-violet-400 disabled:opacity-60"
+					className="flex w-full items-center justify-center gap-2 rounded-md bg-violet-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-violet-500 disabled:opacity-60"
 				>
 					{pending && <LoaderCircle className="size-4 animate-spin" />}
-					Create account
+					{pending ? "A criar conta…" : "Criar conta"}
 				</button>
 			</form>
 		</AuthCard>

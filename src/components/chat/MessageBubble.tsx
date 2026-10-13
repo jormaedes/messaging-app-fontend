@@ -15,35 +15,35 @@ export function MessageBubble({ message, mine, seen, onRetry }: MessageBubblePro
 
 	return (
 		<div className={`flex ${mine ? "justify-end" : "justify-start"}`}>
-			<div className="max-w-[75%]">
+			<div className="max-w-[88%] sm:max-w-[75%]">
 				<div
-					className={`whitespace-pre-wrap rounded-2xl px-4 py-2.5 text-sm [overflow-wrap:anywhere] ${mine ? "rounded-br-md bg-violet-500" : "rounded-bl-md bg-white/10"
+					className={`whitespace-pre-wrap wrap-anywhere rounded-xl px-3.5 py-2.5 text-sm leading-relaxed ${mine ? "rounded-br-sm bg-violet-600 text-white" : "rounded-bl-sm border border-[#302a3b] bg-[#191620] text-[#eee9f6]"
 						} ${sending ? "opacity-60" : ""}`}
 				>
 					{message.content}
 				</div>
 
 				<div
-					className={`mt-1 flex items-center gap-1.5 text-xs text-white/40 ${mine ? "justify-end" : "justify-start"
+					className={`mt-1 flex items-center gap-1.5 text-[11px] text-[#837b8f] ${mine ? "justify-end" : "justify-start"
 						}`}
 				>
 					{failed ? (
 						<button
 							onClick={onRetry}
-							className="flex items-center gap-1 text-red-300 hover:underline"
+							className="flex items-center gap-1 text-red-400 hover:underline"
 						>
 							<RotateCw className="size-3" aria-hidden />
-							Failed. Retry
+							Falhou. Tentar novamente
 						</button>
 					) : sending ? (
-						<span>Sending…</span>
+						<span>A enviar…</span>
 					) : (
 						<>
 							<span>{formatTime(message.createdAt)}</span>
 							{seen && (
 								<span className="flex items-center gap-1 text-violet-300">
 									<CheckCheck className="size-3" aria-hidden />
-									Seen
+								Visto
 								</span>
 							)}
 						</>

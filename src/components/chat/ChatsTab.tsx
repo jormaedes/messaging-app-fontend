@@ -8,7 +8,7 @@ import type { ConversationListItem } from "@/lib/types";
 import { useAuthStore } from "@/stores/auth";
 import { useChatStore } from "@/stores/chat";
 
-const linkButton = "text-sm text-violet-300 hover:underline";
+const linkButton = "text-sm font-medium text-violet-300 hover:underline";
 
 export function ChatsTab({ query, onFindPeople }: { query: string; onFindPeople: () => void }) {
 	const meId = useAuthStore((s) => s.user?.id);
@@ -26,11 +26,11 @@ export function ChatsTab({ query, onFindPeople }: { query: string; onFindPeople:
 			return (
 				<EmptyState
 					icon={MessageCircle}
-					title="Couldn't load your chats"
-					description="Check your connection and try again."
+						title="Não foi possível carregar as conversas"
+						description="Verifica a ligação à internet e tenta novamente."
 					action={
 						<button onClick={() => void loadConversations()} className={linkButton}>
-							Try again
+							Tentar novamente
 						</button>
 					}
 				/>
@@ -38,19 +38,19 @@ export function ChatsTab({ query, onFindPeople }: { query: string; onFindPeople:
 		}
 		if (status !== "ready") {
 			return (
-				<div className="grid h-full place-items-center" role="status" aria-label="Loading chats">
-					<LoaderCircle className="size-5 animate-spin text-white/40" />
+				<div className="grid h-full place-items-center" role="status" aria-label="A carregar conversas">
+					<LoaderCircle className="size-5 animate-spin text-violet-300" />
 				</div>
 			);
 		}
 		return (
 			<EmptyState
 				icon={MessagesSquare}
-				title="No chats yet"
-				description="Find someone in People to start your first conversation."
+				title="Ainda não tens conversas"
+				description="Procura alguém em Pessoas para começares a conversar."
 				action={
 					<button onClick={onFindPeople} className={linkButton}>
-						Find people
+						Encontrar pessoas
 					</button>
 				}
 			/>
@@ -61,8 +61,8 @@ export function ChatsTab({ query, onFindPeople }: { query: string; onFindPeople:
 		return (
 			<EmptyState
 				icon={MessageCircle}
-				title="No matches found"
-				description={`Nothing in your chats matches “${query.trim()}”.`}
+				title="Sem resultados"
+				description={`Nenhuma conversa corresponde a “${query.trim()}”.`}
 			/>
 		);
 	}
@@ -89,23 +89,23 @@ function ChatRow({ conversation, meId }: { conversation: ConversationListItem; m
 		<li>
 			<button
 				onClick={() => setActive(conversation.id)}
-				className={`flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition ${active ? "bg-white/10" : "hover:bg-white/5"
+				className={`flex w-full items-center gap-3 rounded-md px-2.5 py-3 text-left transition ${active ? "bg-[#261d38] ring-1 ring-inset ring-violet-400/20" : "hover:bg-[#191620]"
 					}`}
 			>
 				<Avatar name={title} src={other?.avatarUrl} online={online} />
 				<div className="min-w-0 flex-1">
 					<div className="flex items-baseline justify-between gap-2">
-						<span className="truncate text-sm font-medium">{title}</span>
+							<span className="truncate text-sm font-semibold text-[#eee9f6]">{title}</span>
 						{last && (
-							<span className="shrink-0 text-xs text-white/40">{formatTime(last.createdAt)}</span>
+							<span className="shrink-0 text-[11px] text-[#837b8f]">{formatTime(last.createdAt)}</span>
 						)}
 					</div>
 					<div className="flex items-center justify-between gap-2">
-						<span className="truncate text-sm text-white/50">
-							{last ? `${last.senderId === meId ? "You: " : ""}${last.content}` : "No messages yet"}
+						<span className="truncate text-[13px] text-[#a79fb2]">
+							{last ? `${last.senderId === meId ? "Tu: " : ""}${last.content}` : "Ainda sem mensagens"}
 						</span>
 						{conversation.unreadCount > 0 && (
-							<span className="grid min-w-5 place-items-center rounded-full bg-violet-500 px-1.5 text-xs font-medium">
+							<span className={`grid min-w-5 place-items-center rounded-full px-1.5 text-xs font-semibold ${active ? "bg-violet-500 text-white" : "bg-[#302a3b] text-[#c4bdcf]"}`}>
 								{conversation.unreadCount}
 							</span>
 						)}

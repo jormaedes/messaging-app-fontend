@@ -125,14 +125,14 @@ export function MessageList({ conversation }: { conversation: ConversationListIt
 			<div className="min-h-0 flex-1">
 				<EmptyState
 					icon={MessageCircle}
-					title="Couldn't load messages"
-					description="Check your connection and try again."
+						title="Não foi possível carregar as mensagens"
+						description="Verifica a ligação à internet e tenta novamente."
 					action={
 						<button
 							onClick={() => void loadInitial(conversationId)}
-							className="text-sm text-violet-300 hover:underline"
+							className="text-sm font-medium text-violet-300 hover:underline"
 						>
-							Try again
+							Tentar novamente
 						</button>
 					}
 				/>
@@ -142,8 +142,8 @@ export function MessageList({ conversation }: { conversation: ConversationListIt
 
 	if (status === "loading" && messages.length === 0) {
 		return (
-			<div className="grid min-h-0 flex-1 place-items-center" role="status" aria-label="Loading messages">
-				<LoaderCircle className="size-5 animate-spin text-white/40" />
+			<div className="grid min-h-0 flex-1 place-items-center" role="status" aria-label="A carregar mensagens">
+				<LoaderCircle className="size-5 animate-spin text-violet-300" />
 			</div>
 		);
 	}
@@ -153,8 +153,8 @@ export function MessageList({ conversation }: { conversation: ConversationListIt
 			<div className="min-h-0 flex-1">
 				<EmptyState
 					icon={MessageCircle}
-					title="No messages yet"
-					description="Say hello to start the conversation."
+					title="Ainda não há mensagens"
+					description="Diz olá para começares a conversa."
 				/>
 			</div>
 		);
@@ -165,12 +165,12 @@ export function MessageList({ conversation }: { conversation: ConversationListIt
 			<div
 				ref={containerRef}
 				onScroll={onScroll}
-				className="min-h-0 flex-1 overflow-y-auto px-5 py-4"
+				className="min-h-0 flex-1 overflow-y-auto bg-[#0c0a10] px-3 py-4 sm:px-6 sm:py-5"
 			>
 				<div className="space-y-3">
 					{loadingMore && (
-						<div className="grid place-items-center py-2" role="status" aria-label="Loading older messages">
-							<LoaderCircle className="size-4 animate-spin text-white/40" />
+						<div className="grid place-items-center py-2" role="status" aria-label="A carregar mensagens anteriores">
+							<LoaderCircle className="size-4 animate-spin text-violet-300" />
 						</div>
 					)}
 					{messages.map((message) => (
@@ -188,10 +188,10 @@ export function MessageList({ conversation }: { conversation: ConversationListIt
 			{hasNew && (
 				<button
 					onClick={jumpToBottom}
-					className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-violet-500 px-3.5 py-1.5 text-xs font-medium shadow-lg shadow-black/40 transition hover:bg-violet-400"
+					className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-violet-600 px-3.5 py-2 text-xs font-medium text-white shadow-lg shadow-violet-950/40 transition hover:bg-violet-500"
 				>
 					<ArrowDown className="size-3.5" aria-hidden />
-					New messages
+					Novas mensagens
 				</button>
 			)}
 		</div>

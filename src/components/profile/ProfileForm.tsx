@@ -82,7 +82,7 @@ export function ProfileForm({ user }: { user: UserSelf }) {
 			setForm(toForm(updated));
 			setSaved(true);
 		} catch (err) {
-			setError(err instanceof ApiError ? err : new ApiError(0, "Could not reach the server"));
+			setError(err instanceof ApiError ? err : new ApiError(0, "Não foi possível ligar ao servidor."));
 		} finally {
 			setPending(false);
 		}
@@ -94,12 +94,12 @@ export function ProfileForm({ user }: { user: UserSelf }) {
 				<Avatar name={form.displayName.trim() || user.username} src={avatarPreview} />
 				<div>
 					<p className="font-medium">@{user.username}</p>
-					<p className="text-sm text-white/50">{user.email}</p>
+					<p className="text-sm text-[#a79fb2]">{user.email}</p>
 				</div>
 			</div>
 
 			<Field
-				label="Display name"
+				label="Nome de apresentação"
 				name="displayName"
 				icon={User}
 				value={form.displayName}
@@ -111,8 +111,8 @@ export function ProfileForm({ user }: { user: UserSelf }) {
 			/>
 
 			<div className="space-y-1.5">
-				<label htmlFor="bio" className="text-sm text-white/70">
-					Bio
+				<label htmlFor="bio" className="text-sm font-medium text-[#d2cbdc]">
+					Sobre mim
 				</label>
 				<textarea
 					id="bio"
@@ -121,31 +121,31 @@ export function ProfileForm({ user }: { user: UserSelf }) {
 					onChange={update("bio")}
 					maxLength={160}
 					rows={3}
-					placeholder="Tell people a little about yourself"
+					placeholder="Conta um pouco sobre ti"
 					aria-invalid={Boolean(fieldError(error, "bio"))}
-					className="w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-sm outline-none transition placeholder:text-white/30 focus:border-violet-400/60"
+					className="w-full resize-none rounded-md border border-[#302a3b] bg-[#17141d] px-3.5 py-2.5 text-sm text-[#f4f1fa] outline-none transition placeholder:text-[#756d80] focus:border-violet-400 focus:ring-2 focus:ring-violet-400/10"
 				/>
 				<div className="flex justify-between text-xs">
-					<span className="text-red-300">{fieldError(error, "bio")}</span>
-					<span className="text-white/40">{form.bio.length}/160</span>
+					<span className="text-red-400">{fieldError(error, "bio")}</span>
+					<span className="text-[#837b8f]">{form.bio.length}/160</span>
 				</div>
 			</div>
 
 			<Field
-				label="Avatar URL"
+				label="Endereço da imagem de perfil"
 				name="avatarUrl"
 				type="url"
 				icon={Link2}
 				value={form.avatarUrl}
 				onChange={update("avatarUrl")}
 				maxLength={500}
-				placeholder="https://example.com/me.png"
+				placeholder="https://exemplo.pt/perfil.png"
 				autoComplete="off"
 				error={fieldError(error, "avatarUrl")}
 			/>
 
 			{error && error.fieldErrors.length === 0 && (
-				<p className="rounded-xl bg-red-400/10 px-3 py-2 text-sm text-red-300" role="alert">
+				<p className="rounded-md bg-red-950/50 px-3 py-2 text-sm text-red-300" role="alert">
 					{error.message}
 				</p>
 			)}
@@ -154,13 +154,13 @@ export function ProfileForm({ user }: { user: UserSelf }) {
 				<button
 					type="submit"
 					disabled={!hasChanges || pending}
-					className="flex items-center gap-2 rounded-2xl bg-violet-500 px-5 py-2.5 text-sm font-medium transition hover:bg-violet-400 disabled:opacity-50"
+					className="flex items-center gap-2 rounded-md bg-violet-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-violet-500 disabled:opacity-50"
 				>
 					{pending && <LoaderCircle className="size-4 animate-spin" />}
-					Save changes
+					Guardar alterações
 				</button>
-				<span className="text-sm text-emerald-300" role="status" aria-live="polite">
-					{saved ? "Saved" : ""}
+				<span className="text-sm text-violet-300" role="status" aria-live="polite">
+					{saved ? "Guardado" : ""}
 				</span>
 			</div>
 		</form>

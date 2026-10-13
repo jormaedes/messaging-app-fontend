@@ -15,13 +15,13 @@ export default function AppLayout({ children }: { children: ReactNode }) {
     if (status === "unauthenticated") router.replace("/login");
   }, [status, router]);
 
-  if (status !== "authenticated") return <FullScreenLoader />;
+  // if (status !== "authenticated") return <FullScreenLoader />;
 
   return (
     <div className="flex h-dvh flex-col">
       <SocketConnector />
       <AppHeader />
-      <main className="min-h-0 flex-1 px-4 pb-4">{children}</main>
+      <main className="min-h-0 flex-1">{children}</main>
     </div>
   );
 }

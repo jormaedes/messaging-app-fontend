@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { AuthInit } from "@/components/AuthInit";
-// ...imports de fontes e globals.css que já lá estão
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Messaging App",
-  description: "Mensagens em tempo real",
+  title: "Jormaedes | Mensagens",
+  description: "Mensagens em tempo real com as pessoas de quem gostas.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt">
+    <html lang="pt-PT">
       <body className={`h-full antialiased`}>
         <AuthInit />
           {children}

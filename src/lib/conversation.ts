@@ -9,15 +9,15 @@ export function otherUser(conversation: Conversation, meId: string | undefined):
 }
 
 export function conversationTitle(conversation: Conversation, meId: string | undefined) {
-	if (conversation.isGroup) return conversation.name ?? "Group";
+	if (conversation.isGroup) return conversation.name ?? "Grupo";
 	const other = otherUser(conversation, meId);
-	return other ? userLabel(other) : "Unknown user";
+	return other ? userLabel(other) : "Pessoa desconhecida";
 }
 
 export function formatTime(iso: string) {
 	const date = new Date(iso);
 	const sameDay = date.toDateString() === new Date().toDateString();
 	return sameDay
-		? date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-		: date.toLocaleDateString([], { day: "2-digit", month: "short" });
+		? date.toLocaleTimeString("pt-PT", { hour: "2-digit", minute: "2-digit" })
+		: date.toLocaleDateString("pt-PT", { day: "2-digit", month: "short" });
 }

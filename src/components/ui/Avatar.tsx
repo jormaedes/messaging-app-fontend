@@ -27,7 +27,7 @@ export function Avatar({ name, src, online, size = "md" }: AvatarProps) {
 				/>
 			) : (
 				<div
-					className={`${dimensions} grid place-items-center rounded-full bg-violet-500/40 font-medium uppercase`}
+					className={`${dimensions} grid place-items-center rounded-full bg-[#30243f] font-semibold uppercase text-[#d6c4ff]`}
 					aria-hidden
 				>
 					{name.slice(0, 2)}
@@ -35,8 +35,8 @@ export function Avatar({ name, src, online, size = "md" }: AvatarProps) {
 			)}
 			{online && (
 				<span
-					className="absolute -bottom-0.5 -right-0.5 size-3 rounded-full border-2 border-[#121214] bg-emerald-400"
-					aria-label="Online"
+					className="absolute -bottom-0.5 -right-0.5 size-3 rounded-full border-2 border-[#100e15] bg-violet-400"
+					aria-label="Disponível"
 				/>
 			)}
 		</div>

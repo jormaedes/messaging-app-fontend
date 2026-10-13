@@ -22,7 +22,7 @@ export default function LoginPage() {
 		try {
 			await login(String(form.get("email")), String(form.get("password")));
 		} catch (err) {
-			setError(err instanceof ApiError ? err : new ApiError(0, "Could not reach the server"));
+			setError(err instanceof ApiError ? err : new ApiError(0, "Não foi possível ligar ao servidor."));
 		} finally {
 			setPending(false);
 		}
@@ -30,29 +30,29 @@ export default function LoginPage() {
 
 	return (
 		<AuthCard
-			title="Welcome back"
-			subtitle="Log in to continue your conversations."
+				title="Bem-vindo/a de volta"
+				subtitle="Inicia sessão para continuares as tuas conversas."
 			footer={
 				<>
-					New here?{" "}
-					<Link href="/signup" className="text-violet-300 hover:underline">
-						Create an account
+					Ainda não tens conta?{" "}
+					<Link href="/signup" className="font-medium text-violet-300 hover:underline">
+						Criar conta
 					</Link>
 				</>
 			}
 		>
 			<form onSubmit={onSubmit} className="space-y-4" noValidate>
 				<Field
-					label="Email"
+					label="Email ou número de telemóvel"
 					name="email"
 					type="email"
 					icon={Mail}
 					autoComplete="email"
-					placeholder="you@example.com"
+					placeholder="nome@exemplo.pt"
 					error={fieldError(error, "email")}
 				/>
 				<Field
-					label="Password"
+					label="Palavra-passe"
 					name="password"
 					type="password"
 					icon={Lock}
@@ -62,7 +62,7 @@ export default function LoginPage() {
 				/>
 
 				{error && error.fieldErrors.length === 0 && (
-					<p className="rounded-xl bg-red-400/10 px-3 py-2 text-sm text-red-300" role="alert">
+					<p className="rounded-md bg-red-950/50 px-3 py-2 text-sm text-red-300" role="alert">
 						{error.message}
 					</p>
 				)}
@@ -70,10 +70,10 @@ export default function LoginPage() {
 				<button
 					type="submit"
 					disabled={pending}
-					className="flex w-full items-center justify-center gap-2 rounded-2xl bg-violet-500 px-4 py-2.5 text-sm font-medium transition hover:bg-violet-400 disabled:opacity-60"
+					className="flex w-full items-center justify-center gap-2 rounded-md bg-violet-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-violet-500 disabled:opacity-60"
 				>
 					{pending && <LoaderCircle className="size-4 animate-spin" />}
-					Log in
+					{pending ? "A entrar…" : "Iniciar sessão"}
 				</button>
 			</form>
 		</AuthCard>

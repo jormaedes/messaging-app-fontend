@@ -12,22 +12,22 @@ export function Field({ label, icon: Icon, error, id, ...props }: FieldProps) {
 
 	return (
 		<div className="space-y-1.5">
-			<label htmlFor={inputId} className="text-sm text-white/70">
+			<label htmlFor={inputId} className="text-sm font-medium text-[#d2cbdc]">
 				{label}
 			</label>
 			<div
-				className={`flex items-center gap-2 rounded-2xl border bg-white/5 px-3.5 py-2.5 transition focus-within:border-violet-400/60 ${error ? "border-red-400/60" : "border-white/10"
+				className={`flex items-center gap-2 rounded-md border bg-[#17141d] px-3.5 py-2.5 transition focus-within:border-violet-400 focus-within:ring-2 focus-within:ring-violet-400/10 ${error ? "border-red-400/70" : "border-[#302a3b]"
 					}`}
 			>
-				<Icon className="size-4 shrink-0 text-white/40" aria-hidden />
+				<Icon className="size-4 shrink-0 text-[#8e849e]" aria-hidden />
 				<input
 					id={inputId}
 					aria-invalid={Boolean(error)}
-					className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/30"
+					className="w-full bg-transparent text-sm text-[#f4f1fa] outline-none placeholder:text-[#756d80]"
 					{...props}
 				/>
 			</div>
-			{error && <p className="text-xs text-red-300">{error}</p>}
+			{error && <p className="text-xs text-red-400">{error}</p>}
 		</div>
 	);
 }
