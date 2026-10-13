@@ -18,6 +18,7 @@ interface ChatState {
 	setPresenceInit: (userIds: string[]) => void;
 	setPresence: (userId: string, online: boolean, lastSeenAt?: string) => void;
 	applyRead: (data: { conversationId: string; userId: string; lastReadAt: string }) => void;
+	markRead: (conversationId: string) => Promise<void>;
 	reset: () => void;
 }
 
@@ -140,6 +141,28 @@ export const useChatStore = create<ChatState>()((set, get) => ({
 					},
 			),
 		}));
+	},
+
+	markRead: async (conversationId) => {
+		const meId = useAuthStore.getState().user?.id;
+
+		// 1) Optimista: zera o contador já
+		set((s) => ({
+			conversations: s.conversations.map((c) =>
+				c.id === conversationId ? { ...c, unreadCount: 0 } : c,
+			),
+		}));
+
+		// 2) Avisa o servidor e guarda o lastReadAt oficial
+		try {
+			const { lastReadAt } = await request<{ conversationId: string; lastReadAt: string }>(
+				`/conversations/${conversationId}/read`,
+				{ method: "POST" },
+			);
+			if (meId) get().applyRead({ conversationId, userId: meId, lastReadAt });
+		} catch {
+			// silencioso: a próxima carga da lista corrige qualquer diferença
+		}
 	},
 
 	reset: () => set(initialState),

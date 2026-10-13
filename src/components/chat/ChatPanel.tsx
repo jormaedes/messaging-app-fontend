@@ -7,6 +7,8 @@ import { GlassPanel } from "@/components/ui/GlassPanel";
 import { conversationTitle, formatTime, otherUser } from "@/lib/conversation";
 import { useAuthStore } from "@/stores/auth";
 import { useChatStore } from "@/stores/chat";
+import { Composer } from "./Composer";
+import { MessageList } from "./MessageList";
 
 export function ChatPanel() {
 	const meId = useAuthStore((s) => s.user?.id);
@@ -52,9 +54,9 @@ export function ChatPanel() {
 					<p className="text-xs text-white/45">{subtitle}</p>
 				</div>
 			</header>
-			<div className="grid flex-1 place-items-center text-sm text-white/40">
-				Messages come next.
-			</div>
+
+			<MessageList key={conversation.id} conversation={conversation} />
+			<Composer key={conversation.id} conversationId={conversation.id} />
 		</GlassPanel>
 	);
 }

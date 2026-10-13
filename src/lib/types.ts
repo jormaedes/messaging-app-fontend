@@ -59,3 +59,16 @@ export interface SignupInput {
 	password: string;
 	confirmPassword: string;
 }
+
+export type MessageStatus = "sending" | "failed";
+
+// Mensagem no cliente: pode ainda não ter sido confirmada pelo servidor
+export interface ClientMessage extends Message {
+	status?: MessageStatus;
+}
+
+// Resposta do GET /conversations/:id/messages
+export interface MessagesPage {
+	messages: Message[];
+	nextCursor: string | null;
+}
