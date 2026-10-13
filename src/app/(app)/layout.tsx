@@ -3,7 +3,7 @@
 import { useEffect, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/stores/auth";
-import { FullScreenLoader } from "@/components/ui/FullScreenLoader";
+// import { FullScreenLoader } from "@/components/ui/FullScreenLoader";
 import { SocketConnector } from "@/components/SocketConnector";
 import { AppHeader } from "@/components/layout/AppHeader";
 
