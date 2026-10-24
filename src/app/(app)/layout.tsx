@@ -3,7 +3,7 @@
 import { useEffect, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/stores/auth";
-// import { FullScreenLoader } from "@/components/ui/FullScreenLoader";
+import { FullScreenLoader } from "@/components/ui/FullScreenLoader";
 import { SocketConnector } from "@/components/SocketConnector";
 import { AppHeader } from "@/components/layout/AppHeader";
 
@@ -15,7 +15,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
     if (status === "unauthenticated") router.replace("/login");
   }, [status, router]);
 
-  // if (status !== "authenticated") return <FullScreenLoader />;
+  if (status !== "authenticated") return <FullScreenLoader />;
 
   return (
     <div className="flex h-dvh flex-col">
